@@ -10,7 +10,7 @@
 
 
 NAME := certmonitor
-SRC := certmonitor
+SRC := dashboard
 
 clean:
 	@rm -fR $(NAME)env

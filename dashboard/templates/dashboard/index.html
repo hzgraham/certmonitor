@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Certificate Dashboard</title>
+    <meta name="viewport content = "width-device-width, initial-scale=1.0 />
+    <meta charset="utf-8" />
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/flat-ui.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/styles.css' %}" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'dashboard/favicon.ico' %}"/>
+  </head>
+
+  <body class="body">
+    <header>
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+	<div class="container">
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	      <span class="sr-only">Toggle navigation</span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	    <a class="navbar-brand" href="/dashboard/">Certificate Monitoring</a>
+	  </div>
+	  <div class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	      <li {% if request.path|slice:":16" == "/dashboard/prod/" %}class="active"{% endif %}><a href="/dashboard/prod/">Prod</a></li>
+	      <li {% if request.path|slice:":16" == "/dashboard/stage" %}class="active"{% endif %}><a href="/dashboard/stage/">Stage</a></li>
+	      <li {% if request.path|slice:":16" == "/dashboard/qa/" %}class="active"{% endif %}><a href="/dashboard/qa/">QA</a></li>
+	      <li {% if request.path|slice:":16" == "/dashboard/dev/" %}class="active"{% endif %}><a href="/dashboard/dev/">Dev</a></li>
+	      <li {% if request.path|slice:":16" == "/dashboard/tasks" %}class="active"{% endif %}><a href="/dashboard/tasks/">Patching Tasks</a></li>
+	      {% if user.is_authenticated %}
+	      <li {% if request.path|slice:":16" == "/dashboard/profile/" %}class="active"{% endif %}><a href="/dashboard/profile/">{{ user.ldap_user.attrs.displayname|join:", " }}'s Profile</a></li>
+	      <li {% if request.path|slice:":16" == "/dashboard/logout/" %}class="active"{% endif %}><a href="/dashboard/logout/">Logout</a></li>
+	      {% else %}
+	      <li {% if request.path|slice:":16" == "/dashboard/login/" %}class="active"{% endif %}><a href="/dashboard/login/">Login</a></li>
+	      {% endif %}
+	    </ul>
+	  </div>
+	</div>
+      </nav>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+    
+    
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+	<ul class="nav navbar-nav pull-left">
+	  <li>
+	    <p class="navbar-text">{{ encouragement }}</p>
+	  </li>
+	</ul>
+      </div>
+    </nav> 
+  </body>
+
+  <script src="{% static 'dashboard/javascript/jquery.js' %}"></script>
+  <script src="{% static 'dashboard/javascript/jquery.tablesorter.js' %}"></script>
+  <script src="{% static 'dashboard/javascript/bootstrap-3.3.2.min.js' %}"></script>
+  <script src="{% static 'dashboard/javascript/flat-ui.min.js' %}"></script>
+  <script>
+    $(document).ready(function()
+    {
+    $("#myTable").tablesorter( {sortList: [[0,0]]} );
+    }
+    );
+  </script>
+  <script src="{% static 'dashboard/javascript/patching.js' %}"></script>
+</html>

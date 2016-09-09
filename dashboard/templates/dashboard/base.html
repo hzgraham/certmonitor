@@ -1,0 +1,32 @@
+{% extends 'dashboard/index.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="content">
+    <article class="typicalArticle">
+      <header>
+	<h3 style="font-size:40px">Welcome to the Certmonitor App</h3>
+      </header>
+      <p style="font-size:30px">
+	Select from environments or tasks in the top navigation.
+      </p>
+      <ul style="font-size:20px">
+	<li>The "Certificates" tab will take you to a list of expiring certificates.</li>
+      </ul>
+      <h4>Upload Openssl </h4>
+      <form action="/dashboard/index/" method="get">
+	<div class="row">
+	  <div class="col-xs-7">
+	    <input type="text" name="indexpath" class="form-control" placeholder="https://somegithost.com/somerepo.git">
+	  </div>
+	  <div class="col-xs-3">
+	    <input type="submit" class="btn btn-info" value="Clone" name="mybtn">
+	  </div>
+	</div>
+      </form>
+    </article>
+  </div>
+</div>
+
+{% endblock %}
