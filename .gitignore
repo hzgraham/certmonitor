@@ -23,6 +23,6 @@ db.sqlite3
 /venv
 *manifests*
 patchappenv
-static/*
+#static/*
 .*
 !/.gitignore
